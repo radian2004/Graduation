@@ -806,15 +806,14 @@ body {
   color: var(--text-dark);
 }
 
-/* Bộ lọc & khung tâm thư cảm ơn (Căn giữa trang trọng) */
+/* Bộ lọc & khung tâm thư cảm ơn (Căn đều 2 bên trang trọng) */
 .gratitude-content {
-  text-align: center;
+  text-align: left;
 }
 
 .gratitude-pills {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 8px;
   margin-bottom: 12px;
 }
@@ -845,11 +844,11 @@ body {
 .letter-box {
   background: linear-gradient(180deg, #ffffff 0%, #faf3e6 100%);
   border: 1.5px solid rgba(168, 118, 36, 0.35);
-  border-top: 3.5px solid var(--gold-primary);
+  border-left: 4px solid var(--gold-primary);
   border-radius: 14px;
   padding: 18px 24px;
   margin-bottom: 14px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 6px 18px rgba(77, 62, 48, 0.05);
 }
 
@@ -858,7 +857,7 @@ body {
   font-weight: 700;
   font-style: italic;
   color: var(--text-dark);
-  text-align: center;
+  text-align: left;
   margin-bottom: 10px;
 }
 
@@ -866,7 +865,8 @@ body {
   font-size: 0.89rem;
   line-height: 1.65;
   color: var(--text-body);
-  text-align: center;
+  text-align: justify;
+  text-align-last: left;
   margin-bottom: 10px;
 }
 
@@ -877,7 +877,7 @@ body {
 
 .page-cta-row {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .letter-signature-row {
@@ -1615,17 +1615,18 @@ body {
   font-style: italic;
   line-height: 1.62;
   color: var(--text-dark);
-  text-align: center;
+  text-align: justify;
+  text-align-last: left;
   margin-bottom: 14px;
 }
 
 .farewell-signoff-card {
   background: var(--paper-card);
   border: 1.5px solid var(--border-gold);
-  border-top: 3.5px solid var(--gold-primary);
+  border-left: 4px solid var(--gold-primary);
   border-radius: 14px;
   padding: 18px 20px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 8px 24px rgba(77, 62, 48, 0.06);
   flex: 1;
   display: flex;
@@ -1637,13 +1638,13 @@ body {
   font-size: 0.88rem;
   color: var(--text-body);
   line-height: 1.6;
-  text-align: center;
+  text-align: justify;
+  text-align-last: left;
   margin-top: 6px;
 }
 
 .farewell-actions {
   margin-top: 14px;
-  justify-content: center;
 }
 
 .tips-cards {
