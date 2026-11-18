@@ -517,10 +517,9 @@ body {
    ========================================================================== */
 .page-1-grid {
   display: grid;
-  grid-template-columns: 310px 1fr;
+  grid-template-columns: 335px 1fr;
   gap: 28px;
   align-items: center;
-  my: auto;
 }
 
 .hero-portrait-card {
@@ -536,9 +535,14 @@ body {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  aspect-ratio: 4 / 4.6;
+  aspect-ratio: 4 / 3.4;
   border: 2px solid var(--gold-light);
   margin-bottom: 14px;
+  background: var(--paper-cream-soft);
+}
+
+.portrait-frame.is-landscape {
+  aspect-ratio: 3 / 2;
 }
 
 .portrait-frame img {
@@ -788,7 +792,7 @@ body {
 
 .polaroid-img-wrap {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 2;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 7px;
@@ -1455,7 +1459,7 @@ body {
 .lightbox-content {
   position: relative;
   z-index: 2;
-  max-width: 680px;
+  max-width: 860px;
   width: 100%;
   background: var(--paper-cream);
   padding: 14px 14px 18px;

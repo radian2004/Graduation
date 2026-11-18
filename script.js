@@ -10,7 +10,7 @@ const GRADUATION_CONFIG = {
   degreeTitle: "Tân Cử Nhân ngành Kỹ thuật Máy tính",
   university: "Trường Đại học Công nghệ thông tin • Khoa Kỹ thuật Máy tính",
   heroPhotoUrl:
-    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80",
+    "https://drive.google.com/file/d/1kQLFccvk18ddiYtkZkSxBr92OZJQO9bn/view?usp=sharing",
 
   // 2. Nội dung tâm thư cảm ơn theo từng đối tượng (Trang 1)
   gratitudeLetters: {
@@ -113,6 +113,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const dockPrevBtn = document.getElementById("dockPrevBtn");
   const dockNextBtn = document.getElementById("dockNextBtn");
 
+  // Helper tự động chuyển link chia sẻ Google Drive (/file/d/.../view) sang link ảnh trực tiếp đã nén tối ưu cho ảnh gốc 6000x4000
+  function extractGoogleDriveId(url) {
+    if (!url || typeof url !== "string") return null;
+    const fileMatch = url.match(/\/(?:file\/)?d\/([a-zA-Z0-9_-]{15,})/);
+    if (fileMatch && fileMatch[1]) return fileMatch[1];
+    const idParamMatch = url.match(/[?&]id=([a-zA-Z0-9_-]{15,})/);
+    if (idParamMatch && idParamMatch[1]) return idParamMatch[1];
+    return null;
+  }
+
+  function resolveImageUrl(url, size = "w1200") {
+    const driveId = extractGoogleDriveId(url);
+    if (driveId) {
+      return `https://drive.google.com/thumbnail?id=${driveId}&sz=${size}`;
+    }
+    return url;
+  }
+
+  function attachDriveImageFallback(imgEl, originalUrl, size = "w1200") {
+    if (!imgEl) return;
+    imgEl.referrerPolicy = "no-referrer";
+    const driveId = extractGoogleDriveId(originalUrl);
+    let fallbackStep = 0;
+    imgEl.onerror = () => {
+      if (!driveId) return;
+      fallbackStep += 1;
+      if (fallbackStep === 1) {
+        imgEl.src = `https://lh3.googleusercontent.com/d/${driveId}=${size}`;
+      } else if (fallbackStep === 2) {
+        imgEl.src = `https://drive.google.com/uc?export=view&id=${driveId}`;
+      }
+    };
+  }
+
   // 1. Áp dụng thông tin từ GRADUATION_CONFIG lên giao diện
   function applyConfiguration() {
     setText("headerGradName", `Lễ Tốt Nghiệp • ${GRADUATION_CONFIG.signatureName}`);
@@ -123,7 +157,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const heroImg = document.getElementById("gradHeroPhoto");
     if (heroImg && GRADUATION_CONFIG.heroPhotoUrl) {
-      heroImg.src = GRADUATION_CONFIG.heroPhotoUrl;
+      attachDriveImageFallback(heroImg, GRADUATION_CONFIG.heroPhotoUrl, "w1200");
+      heroImg.onload = () => {
+        const frame = heroImg.closest(".portrait-frame");
+        if (frame) {
+          frame.classList.toggle("is-landscape", heroImg.naturalWidth > heroImg.naturalHeight);
+        }
+      };
+      heroImg.src = resolveImageUrl(GRADUATION_CONFIG.heroPhotoUrl, "w1200");
     }
 
     setText("eventDateTimeText", GRADUATION_CONFIG.eventDateTimeDisplay);
@@ -343,13 +384,16 @@ document.addEventListener("DOMContentLoaded", () => {
     GRADUATION_CONFIG.memories.forEach((item) => {
       const card = document.createElement("article");
       card.className = "polaroid-card";
+      const displayUrl = resolveImageUrl(item.url, "w1000");
       card.innerHTML = `
         <div class="polaroid-img-wrap">
-          <img src="${item.url}" alt="${item.caption}" loading="lazy" />
+          <img src="${displayUrl}" alt="${item.caption}" loading="lazy" referrerpolicy="no-referrer" />
         </div>
         <span class="polaroid-tag">${item.date}</span>
         <p class="polaroid-caption">${item.caption}</p>
       `;
+      const imgEl = card.querySelector("img");
+      attachDriveImageFallback(imgEl, item.url, "w1000");
       card.addEventListener("click", () => openLightbox(item));
       polaroidGallery.appendChild(card);
     });
@@ -357,7 +401,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openLightbox(item) {
     if (!lightboxModal || !lightboxImg) return;
-    lightboxImg.src = item.url;
+    attachDriveImageFallback(lightboxImg, item.url, "w2000");
+    lightboxImg.src = resolveImageUrl(item.url, "w2000");
     if (lightboxDate) lightboxDate.textContent = item.date;
     if (lightboxCaption) lightboxCaption.textContent = item.caption;
     lightboxModal.hidden = false;
