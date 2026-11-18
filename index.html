@@ -46,32 +46,10 @@
         <span class="tab-label">Lời Nhắn &amp; Hẹn Gặp</span>
       </button>
     </nav>
-
-    <div class="top-actions">
-      <button class="music-btn" id="bgMusicToggleBtn" type="button" title="Bật/Tắt nhạc nền">
-        <span id="bgMusicIcon">🎵</span>
-        <span class="sound-text" id="bgMusicText">Nhạc nền</span>
-      </button>
-      <audio id="bgMusicAudio" loop preload="auto"></audio>
-    </div>
   </header>
 
-  <!-- Hộp phát nhạc Google Drive thu gọn (tự động hiện nếu link nhạc Google Drive chặn phát ngầm) -->
-  <div class="drive-music-widget" id="driveMusicWidget" hidden>
-    <div class="drive-music-header">
-      <span>🎵 Nhạc nền Lễ Tốt Nghiệp</span>
-      <button type="button" id="closeDriveMusicBtn" aria-label="Ẩn hộp nhạc">✕</button>
-    </div>
-    <iframe
-      id="driveMusicIframe"
-      src=""
-      width="290"
-      height="68"
-      allow="autoplay; encrypted-media"
-      frameborder="0"
-      title="Trình phát nhạc nền Google Drive"
-    ></iframe>
-  </div>
+  <!-- Nhạc nền tự động phát xuyên suốt -->
+  <audio id="bgMusicAudio" src="music.mp3" autoplay loop preload="auto"></audio>
 
   <!-- Khu vực Sách / Thiệp 3D Flipbook -->
   <main class="stage-wrapper">
@@ -375,6 +353,24 @@
                       <span class="info-label">Địa điểm</span>
                       <h4 class="info-main" id="eventVenueName">Sảnh dưới tòa E</h4>
                       <p class="info-sub" id="eventVenueAddress">Trường Đại học Công nghệ Thông tin, Đường Hàn Thuyên, P. Linh Xuân, Tp. Hồ Chí Minh</p>
+                    </div>
+                  </div>
+
+                  <!-- Khung ảnh hướng dẫn vị trí chụp ảnh (bấm để phóng to) -->
+                  <div class="venue-photo-card" id="venuePhotoCard" role="button" tabindex="0" aria-label="Xem ảnh vị trí chụp ảnh">
+                    <div class="venue-photo-thumb">
+                      <img
+                        id="venuePhotoImg"
+                        src=""
+                        alt="Ảnh vị trí chụp ảnh tại Sảnh dưới tòa E"
+                        referrerpolicy="no-referrer"
+                      />
+                      <span class="venue-zoom-tag">🔍 Xem rõ</span>
+                    </div>
+                    <div class="venue-photo-info">
+                      <span class="venue-photo-badge">📸 Hình ảnh vị trí chụp ảnh</span>
+                      <strong class="venue-photo-title" id="venuePhotoTitleText">Khu vực Sảnh dưới tòa E (UIT)</strong>
+                      <span class="venue-photo-hint">Chạm vào đây để phóng to ảnh vị trí đón khách</span>
                     </div>
                   </div>
                 </div>
