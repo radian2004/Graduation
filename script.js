@@ -62,7 +62,7 @@ const GRADUATION_CONFIG = {
       caption: "Khoảnh khắc vỡ òa khi hoàn thành đồ án tốt nghiệp"
     },
     {
-      url: "https://drive.google.com/file/d/1kQLFccvk18ddiYtkZkSxBr92OZJQO9bn/view?usp=sharing",
+      url: "https://drive.google.com/file/d/1BUEcWzVvqz3zKC62ZoLCl119YaRk1AGp/view?usp=sharing",
       date: "Lễ Tốt Nghiệp • 2026",
       caption: "Khép lại một hành trình đẹp để mở ra chân trời mới"
     }
@@ -72,7 +72,7 @@ const GRADUATION_CONFIG = {
   eventIsoDate: "2026-11-25T08:30:00+07:00", // Định dạng YYYY-MM-DDTHH:mm:ss+07:00 để đếm ngược
   eventDateTimeDisplay: "10:30 - 12:00 • Chủ Nhật, 25/11/2026",
   eventPhotoTimeNote: "Khung giờ chụp ảnh đẹp nhất với mình: <strong>10:30 – 11:00</strong>",
-  eventVenueName: "Hội trường Lớn (Nhà A1) - Trường Đại học",
+  eventVenueName: "Sảnh dưới tòa E",
   eventVenueAddress: "Trường Đại học Công nghệ Thông tin, Đường Hàn Thuyên, P. Linh Xuân, Tp. Hồ Chí Minh",
   googleMapsUrl: "https://maps.app.goo.gl/C5xfqYLQYLJYePYv5",
 
@@ -83,8 +83,8 @@ const GRADUATION_CONFIG = {
   backupContactName: "Ngọc Trâm",
   backupContactPhone: "0395122891",
   backupContactPhoneDisplay: "0395 122 891",
-  zaloUrl: "https://zalo.me/0945823008",
-  messengerUrl: "https://m.me/",
+  zaloUrl: "https://zalo.me/0945283008",
+  messengerUrl: "https://www.facebook.com/thanhannguyen2004/",
 
   // 5. KẾT NỐI NHẬN LỜI CHÚC & XÁC NHẬN THAM DỰ VỀ GOOGLE SHEET / EMAIL CÁ NHÂN
   // - Cách 1 (Google Sheet miễn phí): Dán link Web App Google Apps Script vào googleSheetWebhookUrl
@@ -154,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setText("gradFullName", GRADUATION_CONFIG.graduateName);
     setText("gradUniversity", GRADUATION_CONFIG.university);
     setText("gradSignature", GRADUATION_CONFIG.signatureName);
+    setText("closingSignature", GRADUATION_CONFIG.signatureName);
 
     const heroImg = document.getElementById("gradHeroPhoto");
     if (heroImg && GRADUATION_CONFIG.heroPhotoUrl) {
@@ -544,62 +545,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (submitWishBtn) {
           submitWishBtn.disabled = false;
           submitWishBtn.innerHTML = "<span>✨ Gửi Lời Chúc Tới Tân Cử Nhân</span>";
-        }
-      }
-    });
-  }
-
-  // Xử lý submit Form Xác nhận tham dự RSVP (Trang 4)
-  const rsvpForm = document.getElementById("rsvpForm");
-  const rsvpStatusMsg = document.getElementById("rsvpStatusMsg");
-  const submitRsvpBtn = document.getElementById("submitRsvpBtn");
-
-  if (rsvpForm) {
-    rsvpForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const name = document.getElementById("rsvpName")?.value.trim();
-      const phone = document.getElementById("rsvpPhone")?.value.trim() || "Không để lại SĐT";
-      const attendance =
-        document.querySelector('input[name="attendance"]:checked')?.value || "Chắc chắn tham dự";
-      const arrivalTime = document.getElementById("rsvpTimeSlot")?.value || "";
-      const guestCount = document.getElementById("rsvpGuests")?.value || "";
-      const extraNote = document.getElementById("rsvpNote")?.value.trim() || "";
-
-      if (!name) return;
-
-      if (submitRsvpBtn) {
-        submitRsvpBtn.disabled = true;
-        submitRsvpBtn.textContent = "Đang gửi xác nhận...";
-      }
-
-      const payload = {
-        formType: "XÁC NHẬN THAM DỰ (RSVP)",
-        name,
-        phone,
-        attendance,
-        arrivalTime,
-        guestCount,
-        extraNote,
-        submittedAt: new Date().toLocaleString("vi-VN")
-      };
-
-      try {
-        await sendPayloadToOwner(payload);
-        rsvpForm.reset();
-        if (rsvpStatusMsg) {
-          rsvpStatusMsg.className = "form-status-msg success";
-          rsvpStatusMsg.textContent = "🎓 Đã ghi nhận xác nhận tham dự của bạn! Hẹn gặp bạn tại buổi lễ nhé!";
-        }
-        showToast("🎉 Đã gửi xác nhận tham dự thành công!");
-      } catch {
-        if (rsvpStatusMsg) {
-          rsvpStatusMsg.className = "form-status-msg error";
-          rsvpStatusMsg.textContent = "Có lỗi kết nối nhỏ, bạn thử gửi lại nhé!";
-        }
-      } finally {
-        if (submitRsvpBtn) {
-          submitRsvpBtn.disabled = false;
-          submitRsvpBtn.innerHTML = "<span>🎓 Gửi Xác Nhận Cho Tân Cử Nhân</span>";
         }
       }
     });

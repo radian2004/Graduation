@@ -6,10 +6,10 @@
   <title>Thiệp Mời Lễ Tốt Nghiệp | Graduation Invitation 2026</title>
   <meta name="description" content="Thiệp mời tham dự Lễ Tốt Nghiệp - Lời tri ân gửi tới gia đình, người thân và bạn bè." />
 
-  <!-- Google Fonts hỗ trợ đầy đủ Tiếng Việt -->
+  <!-- Google Fonts hỗ trợ chuẩn Tiếng Việt & chữ số đều dòng -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -333,52 +333,43 @@
             <div class="page-3-grid">
               <!-- Cột Thời gian & Địa điểm -->
               <div class="event-details-card">
-                <div class="info-block">
-                  <div class="info-icon">🗓️</div>
-                  <div class="info-text">
-                    <span class="info-label">Thời gian tổ chức</span>
-                    <h3 class="info-main" id="eventDateTimeText">08:30 - 11:30 • Chủ Nhật, 20/12/2026</h3>
-                    <p class="info-sub" id="eventPhotoTimeNote">Khung giờ chụp ảnh đẹp nhất với mình: <strong>09:30 – 11:30</strong></p>
+                <div class="contact-card-header">
+                  <span class="contact-tag">📍 Thời Gian &amp; Địa Điểm</span>
+                  <h3 class="serif-subtitle">Lịch Trình &amp; Nơi Đón Khách</h3>
+                  <p class="contact-desc">
+                    Mình sẽ có mặt tại khu vực sảnh để đón mọi người và cùng nhau lưu lại những tấm hình kỷ niệm thật đẹp.
+                  </p>
+                </div>
+
+                <div class="info-list">
+                  <div class="info-block">
+                    <div class="info-icon">🗓️</div>
+                    <div class="info-text">
+                      <span class="info-label">Thời gian tổ chức</span>
+                      <h4 class="info-main" id="eventDateTimeText">10:30 - 12:00 • Chủ Nhật, 25/11/2026</h4>
+                      <p class="info-sub" id="eventPhotoTimeNote">Khung giờ chụp ảnh đẹp nhất với mình: <strong>10:30 – 11:00</strong></p>
+                    </div>
+                  </div>
+
+                  <div class="info-block">
+                    <div class="info-icon">📍</div>
+                    <div class="info-text">
+                      <span class="info-label">Địa điểm đón khách</span>
+                      <h4 class="info-main" id="eventVenueName">Sảnh dưới tòa E</h4>
+                      <p class="info-sub" id="eventVenueAddress">Trường Đại học Công nghệ Thông tin, Đường Hàn Thuyên, P. Linh Xuân, Tp. Hồ Chí Minh</p>
+                    </div>
                   </div>
                 </div>
 
-                <div class="info-block">
-                  <div class="info-icon">📍</div>
-                  <div class="info-text">
-                    <span class="info-label">Địa điểm</span>
-                    <h3 class="info-main" id="eventVenueName">Hội trường Lớn (Nhà A1) - Trường Đại học</h3>
-                    <p class="info-sub" id="eventVenueAddress">Số 1 Đại Cồ Việt / Xuân Thủy, Hà Nội (hoặc địa chỉ trường của bạn)</p>
-                  </div>
-                </div>
-
-                <!-- Lịch trình tóm tắt -->
-                <div class="timeline-mini">
-                  <div class="timeline-step">
-                    <span class="tl-time" id="tlTime1">08:00</span>
-                    <span class="tl-dot"></span>
-                    <span class="tl-desc" id="tlDesc1">Làm lễ trao bằng bên trong Hội trường</span>
-                  </div>
-                  <div class="timeline-step highlight">
-                    <span class="tl-time" id="tlTime2">09:30</span>
-                    <span class="tl-dot"></span>
-                    <span class="tl-desc" id="tlDesc2">Ra sảnh chính đón khách &amp; Chụp ảnh kỷ niệm</span>
-                  </div>
-                  <div class="timeline-step">
-                    <span class="tl-time" id="tlTime3">11:30</span>
-                    <span class="tl-dot"></span>
-                    <span class="tl-desc" id="tlDesc3">Giao lưu thân mật &amp; Kết thúc buổi lễ</span>
-                  </div>
-                </div>
-
-                <div class="action-buttons-row">
+                <div class="action-buttons-row two-cols">
                   <a
                     id="googleMapsBtn"
-                    href="https://maps.google.com"
+                    href="https://maps.app.goo.gl/C5xfqYLQYLJYePYv5"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="gold-btn"
                   >
-                    📍 Xem Chỉ Đường Google Maps
+                    📍 Xem Chỉ Đường Maps
                   </a>
                   <button type="button" id="addToCalendarBtn" class="outline-gold-btn">
                     📅 Lưu Vào Lịch Điện Thoại
@@ -392,7 +383,7 @@
                   <span class="contact-tag">📞 Liên Hệ Đón Tiếp</span>
                   <h3 class="serif-subtitle">Gọi Cho Mình Khi Bạn Tới Nhé!</h3>
                   <p class="contact-desc">
-                    Khuôn viên trường hôm lễ khá đông, khi tới cổng bạn cứ nhắn hoặc gọi để mình/người thân ra đón tận nơi nha.
+                    Khuôn viên trường hôm lễ khá đông, khi tới cổng bạn cứ nhắn hoặc gọi mình và người thân nhá!
                   </p>
                 </div>
 
@@ -400,34 +391,34 @@
                   <div class="contact-item">
                     <div class="contact-item-left">
                       <span class="c-badge">Chính chủ</span>
-                      <strong id="contactMainName">Minh Thành</strong>
-                      <span class="c-phone" id="contactMainPhone">0912 345 678</span>
+                      <strong id="contactMainName">Thanh An</strong>
+                      <span class="c-phone" id="contactMainPhone">0945 283 008</span>
                     </div>
                     <div class="contact-item-actions">
-                      <a id="callMainBtn" href="tel:0912345678" class="mini-action-btn call">Gọi ngay</a>
-                      <button type="button" class="mini-action-btn copy" data-copy="0912345678">Copy SĐT</button>
+                      <a id="callMainBtn" href="tel:0945283008" class="mini-action-btn call">Gọi ngay</a>
+                      <button type="button" class="mini-action-btn copy" data-copy="0945283008">Copy SĐT</button>
                     </div>
                   </div>
 
                   <div class="contact-item">
                     <div class="contact-item-left">
-                      <span class="c-badge secondary">Hỗ trợ đón khách</span>
-                      <strong id="contactBackupName">Bạn thân / Người nhà</strong>
-                      <span class="c-phone" id="contactBackupPhone">0987 654 321</span>
+                      <span class="c-badge secondary">Trợ lý riêng</span>
+                      <strong id="contactBackupName">Ngọc Trâm</strong>
+                      <span class="c-phone" id="contactBackupPhone">0395 122 891</span>
                     </div>
                     <div class="contact-item-actions">
-                      <a id="callBackupBtn" href="tel:0987654321" class="mini-action-btn call">Gọi ngay</a>
-                      <button type="button" class="mini-action-btn copy" data-copy="0987654321">Copy SĐT</button>
+                      <a id="callBackupBtn" href="tel:0395122891" class="mini-action-btn call">Gọi ngay</a>
+                      <button type="button" class="mini-action-btn copy" data-copy="0395122891">Copy SĐT</button>
                     </div>
                   </div>
                 </div>
 
                 <div class="social-links-row">
-                  <a id="zaloLinkBtn" href="https://zalo.me/0912345678" target="_blank" rel="noopener noreferrer" class="social-pill">
+                  <a id="zaloLinkBtn" href="https://zalo.me/0945283008" target="_blank" rel="noopener noreferrer" class="social-pill">
                     💬 Nhắn Zalo
                   </a>
-                  <a id="fbLinkBtn" href="https://m.me/" target="_blank" rel="noopener noreferrer" class="social-pill">
-                    💙 Nhắn Messenger
+                  <a id="fbLinkBtn" href="https://www.facebook.com/thanhannguyen2004/" target="_blank" rel="noopener noreferrer" class="social-pill">
+                    💙 Nhắn Facebook
                   </a>
                 </div>
               </div>
@@ -439,13 +430,13 @@
               </button>
               <span>Trang 3 / 4 • Thông Tin &amp; Liên Hệ</span>
               <button class="corner-curl-btn" type="button" data-goto="3">
-                Sang Trang 4: Lời nhắn &amp; Xác nhận ➔
+                Sang Trang 4: Lời nhắn &amp; Lưu ý ➔
               </button>
             </div>
           </div>
         </section>
 
-        <!-- ================= TRANG 4: LỜI NHẮN, THÔNG TIN LƯU Ý & XÁC NHẬN THAM DỰ ================= -->
+        <!-- ================= TRANG 4: LỜI NHẮN NHỦ & CẨM NANG LƯU Ý ================= -->
         <section class="book-page" data-page-index="3" aria-label="Trang 4: Lời nhắn và thông tin thêm">
           <div class="page-inner">
             <div class="corner-ornament top-left"></div>
@@ -455,15 +446,15 @@
 
             <div class="page-header-tag">
               <span class="line-deco"></span>
-              <span>FINAL NOTES &amp; RSVP • TRANG 04 / 04</span>
+              <span>FINAL NOTES &amp; GUIDELINES • TRANG 04 / 04</span>
               <span class="line-deco"></span>
             </div>
 
             <div class="page-4-grid">
-              <!-- Cột Trái: Lời nhắn nhủ & Lưu ý hữu ích -->
+              <!-- Cột Trái: Lời nhắn nhủ & Khung lời chào kết thiệp trang trọng -->
               <div class="notes-column">
                 <p class="script-subtitle">Đôi điều nhắn gửi</p>
-                <h2 class="serif-title">Lời Nhắn &amp; Cẩm Nang Nhỏ</h2>
+                <h2 class="serif-title">Lời Nhắn Trước Ngày Trọng Đại</h2>
 
                 <div class="closing-quote-box">
                   <p id="closingNoteText">
@@ -471,12 +462,53 @@
                   </p>
                 </div>
 
+                <div class="farewell-signoff-card">
+                  <span class="wish-badge">🎓 Hẹn Gặp Bạn Tại Buổi Lễ</span>
+                  <h3 class="serif-subtitle">Cảm Ơn Vì Đã Là Một Phần Thanh Xuân!</h3>
+                  <p class="farewell-text">
+                    Mình rất mong được gặp lại bạn, cùng nhau lưu giữ những khung hình kỷ niệm thật đẹp tại khuôn viên trường trong ngày lễ tốt nghiệp sắp tới.
+                  </p>
+
+                  <div class="letter-signature-row">
+                    <div>
+                      <span class="sig-caption">Hẹn gặp bạn vào Chủ Nhật, 25/11/2026</span>
+                      <div class="handwritten-sig" id="closingSignature">Thanh An</div>
+                    </div>
+                    <div class="wax-seal" title="Hẹn gặp lại!">
+                      <span>2026</span>
+                    </div>
+                  </div>
+
+                  <div class="action-buttons-row farewell-actions">
+                    <button type="button" class="gold-btn" data-goto="1">
+                      💌 Viết Lời Chúc Lưu Bút
+                    </button>
+                    <button type="button" class="outline-gold-btn" data-goto="2">
+                      📍 Xem Lại Giờ &amp; Địa Điểm
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cột Phải: Cẩm nang lưu ý dành cho khách mời -->
+              <div class="guidelines-column">
+                <p class="script-subtitle">Thông tin hữu ích</p>
+                <h2 class="serif-title">Cẩm Nang Nhỏ Cho Khách Mời</h2>
+
                 <div class="tips-cards">
                   <div class="tip-card">
                     <span class="tip-icon">🛵</span>
                     <div>
                       <h4>Gửi xe &amp; Di chuyển</h4>
-                      <p id="tipParkingText">Bạn gửi xe tại Nhà xe Cổng chính (hoặc Cổng số 2), sau đó đi bộ khoảng 100m vào sảnh Hội trường Lớn.</p>
+                      <p id="tipParkingText">Bạn gửi xe tại bãi giữ xe Cổng chính Trường ĐH Công nghệ Thông tin (UIT), sau đó đi bộ vào khu vực <strong>Sảnh dưới tòa E</strong>.</p>
+                    </div>
+                  </div>
+
+                  <div class="tip-card">
+                    <span class="tip-icon">📸</span>
+                    <div>
+                      <h4>Khung giờ chụp ảnh đẹp nhất</h4>
+                      <p id="tipPhotoTimeText">Mình đón khách và chụp ảnh kỷ niệm từ <strong>10:30 – 12:00</strong> (khung giờ chụp ảnh đẹp nhất với mình là <strong>10:30 – 11:00</strong>).</p>
                     </div>
                   </div>
 
@@ -484,96 +516,17 @@
                     <span class="tip-icon">👗</span>
                     <div>
                       <h4>Gợi ý Trang phục (Dresscode)</h4>
-                      <p id="tipDresscodeText">Trang phục tự do, lịch sự. Tone Trắng, Kem, Be, Pastel hoặc Đen sẽ lên hình cực kỳ nổi bật bên cạnh áo cử nhân!</p>
+                      <p id="tipDresscodeText">Trang phục tự do, lịch sự và thoải mái. Tone màu Trắng, Kem, Be, Pastel hoặc Đen sẽ lên hình cực kỳ nổi bật bên cạnh lễ phục tốt nghiệp!</p>
                     </div>
                   </div>
 
                   <div class="tip-card">
                     <span class="tip-icon">🌤️</span>
                     <div>
-                      <h4>Lưu ý nhỏ</h4>
-                      <p id="tipExtraText">Mình đã chuẩn bị sẵn nước mát, quạt cầm tay và phụ kiện chụp ảnh xinh xắn chờ đón mọi người.</p>
+                      <h4>Lưu ý nhỏ khi đến nơi</h4>
+                      <p id="tipExtraText">Khuôn viên trường hôm lễ khá đông, khi tới cổng bạn cứ gọi điện hoặc nhắn Zalo cho mình để mình và người nhà ra đón tận nơi nhé!</p>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <!-- Cột Phải: Xác nhận tham dự (RSVP) gửi về Google Sheet / Email -->
-              <div class="rsvp-column">
-                <div class="rsvp-card">
-                  <span class="wish-badge">✨ Hẹn Gặp Bạn Tại Buổi Lễ</span>
-                  <h3 class="serif-subtitle">Xác Nhận Tham Dự (RSVP)</h3>
-                  <p class="wish-desc">
-                    Cho mình biết lịch trình của bạn để mình sắp xếp đón tiếp chu đáo nhất nhé!
-                  </p>
-
-                  <form id="rsvpForm" class="luxury-form">
-                    <div class="form-row-2">
-                      <div class="form-group">
-                        <label for="rsvpName">Tên của bạn <span class="req">*</span></label>
-                        <input type="text" id="rsvpName" name="guestName" placeholder="Nhập tên của bạn..." required />
-                      </div>
-                      <div class="form-group">
-                        <label for="rsvpPhone">Số điện thoại (để mình đón)</label>
-                        <input type="tel" id="rsvpPhone" name="guestPhone" placeholder="VD: 09xx xxx xxx" />
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Bạn sẽ đến chung vui cùng mình chứ? <span class="req">*</span></label>
-                      <div class="attendance-options">
-                        <label class="radio-card">
-                          <input type="radio" name="attendance" value="Chắc chắn sẽ đến chung vui!" checked />
-                          <span class="radio-box">🎉 Chắc chắn mình sẽ đến!</span>
-                        </label>
-                        <label class="radio-card">
-                          <input type="radio" name="attendance" value="Mình sẽ cố gắng sắp xếp ghé qua" />
-                          <span class="radio-box">⏳ Mình sẽ cố gắng sắp xếp</span>
-                        </label>
-                        <label class="radio-card">
-                          <input type="radio" name="attendance" value="Tiếc quá mình bận mất rồi, chúc mừng bạn nhé!" />
-                          <span class="radio-box">💌 Bận mất rồi, gửi lời chúc từ xa</span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-row-2">
-                      <div class="form-group">
-                        <label for="rsvpTimeSlot">Khung giờ dự kiến bạn ghé</label>
-                        <select id="rsvpTimeSlot" name="arrivalTime">
-                          <option value="09:30 - 10:15">09:30 - 10:15</option>
-                          <option value="10:15 - 11:00">10:15 - 11:00</option>
-                          <option value="11:00 - 11:30">11:00 - 11:30</option>
-                          <option value="Chưa rõ giờ chính xác">Chưa rõ giờ chính xác</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="rsvpGuests">Đi cùng mấy người?</label>
-                        <select id="rsvpGuests" name="guestCount">
-                          <option value="Đi 1 mình">Đi 1 mình</option>
-                          <option value="Đi 2 người">Đi 2 người</option>
-                          <option value="Đi theo nhóm bạn">Đi theo nhóm bạn</option>
-                          <option value="Đi cùng gia đình">Đi cùng gia đình</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="rsvpNote">Lời nhắn thêm cho mình (nếu có)</label>
-                      <input
-                        type="text"
-                        id="rsvpNote"
-                        name="extraNote"
-                        placeholder="VD: Khi tới cổng số 2 mình gọi nhé..."
-                      />
-                    </div>
-
-                    <button type="submit" class="gold-btn full-width" id="submitRsvpBtn">
-                      <span>🎓 Gửi Xác Nhận Cho Tân Cử Nhân</span>
-                    </button>
-
-                    <div class="form-status-msg" id="rsvpStatusMsg" role="status" aria-live="polite"></div>
-                  </form>
                 </div>
               </div>
             </div>
