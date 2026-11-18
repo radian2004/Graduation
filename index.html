@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiệp Mời Lễ Tốt Nghiệp | Graduation Invitation 2026</title>
+  <meta name="description" content="Thiệp mời tham dự Lễ Tốt Nghiệp - Lời tri ân gửi tới gia đình, người thân và bạn bè." />
+
+  <!-- Google Fonts hỗ trợ đầy đủ Tiếng Việt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Hiệu ứng hạt vàng lấp lánh nền ấm -->
+  <div class="ambient-bg" aria-hidden="true">
+    <span class="glow-orb orb-1"></span>
+    <span class="glow-orb orb-2"></span>
+    <span class="glow-orb orb-3"></span>
+  </div>
+
+  <!-- Thanh điều hướng nhanh 4 trang ở đầu trang -->
+  <header class="top-bar">
+    <div class="brand-badge">
+      <span class="cap-icon" aria-hidden="true">🎓</span>
+      <span class="brand-text" id="headerGradName">Lễ Tốt Nghiệp • 2026</span>
+    </div>
+
+    <nav class="page-tabs" aria-label="Điều hướng các trang thiệp">
+      <button class="tab-btn active" data-page="0" type="button">
+        <span class="tab-num">01</span>
+        <span class="tab-label">Lời Cảm Ơn</span>
+      </button>
+      <button class="tab-btn" data-page="1" type="button">
+        <span class="tab-num">02</span>
+        <span class="tab-label">Kỷ Niệm &amp; Lời Chúc</span>
+      </button>
+      <button class="tab-btn" data-page="2" type="button">
+        <span class="tab-num">03</span>
+        <span class="tab-label">Thông Tin Lễ</span>
+      </button>
+      <button class="tab-btn" data-page="3" type="button">
+        <span class="tab-num">04</span>
+        <span class="tab-label">Lời Nhắn &amp; Hẹn Gặp</span>
+      </button>
+    </nav>
+
+    <div class="top-actions">
+      <button class="music-btn" id="musicToggleBtn" type="button" title="Bật/Tắt hiệu ứng âm thanh lật sách">
+        <span id="soundIcon">🔔</span>
+        <span class="sound-text">Âm thanh</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Khu vực Sách / Thiệp 3D Flipbook -->
+  <main class="stage-wrapper">
+    <!-- Nút lật trang trái (Desktop) -->
+    <button class="side-nav-btn prev-side-btn" id="prevPageSideBtn" type="button" aria-label="Trang trước" disabled>
+      <span class="arrow-icon">←</span>
+      <span class="side-nav-text">Trang trước</span>
+    </button>
+
+    <!-- Khung Flipbook 3D -->
+    <div class="flipbook-scene" id="flipbookScene">
+      <div class="book-frame" id="bookFrame">
+        <!-- Gáy sách vàng đồng bên trái -->
+        <div class="book-spine" aria-hidden="true">
+          <div class="spine-ring ring-1"></div>
+          <div class="spine-ring ring-2"></div>
+          <div class="spine-ring ring-3"></div>
+          <div class="spine-ring ring-4"></div>
+        </div>
+
+        <!-- Độ dày các trang giấy bên phải -->
+        <div class="book-edges" aria-hidden="true"></div>
+
+        <!-- Lớp hiệu ứng tờ giấy đang lật 3D -->
+        <div class="turning-leaf" id="turningLeaf" aria-hidden="true">
+          <div class="leaf-face leaf-front" id="leafFront"></div>
+          <div class="leaf-face leaf-back" id="leafBack"></div>
+          <div class="leaf-shadow"></div>
+        </div>
+
+        <!-- ================= TRANG 1: LỜI CẢM ƠN ================= -->
+        <section class="book-page active" data-page-index="0" aria-label="Trang 1: Lời cảm ơn">
+          <div class="page-inner">
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+
+            <div class="page-header-tag">
+              <span class="line-deco"></span>
+              <span>GRADUATION INVITATION • TRANG 01 / 04</span>
+              <span class="line-deco"></span>
+            </div>
+
+            <div class="page-1-grid">
+              <!-- Cột ảnh chân dung tốt nghiệp -->
+              <div class="hero-portrait-card">
+                <div class="portrait-frame">
+                  <img
+                    id="gradHeroPhoto"
+                    src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80"
+                    alt="Chân dung lễ tốt nghiệp"
+                  />
+                  <div class="portrait-badge">Class of 2026</div>
+                </div>
+                <div class="graduate-identity">
+                  <p class="grad-role" id="gradDegreeTitle">Tân Cử Nhân / Kỹ Sư</p>
+                  <h1 class="grad-name" id="gradFullName">Nguyễn Minh Thành</h1>
+                  <p class="grad-school" id="gradUniversity">Trường Đại học của Bạn • Khoa Công Nghệ</p>
+                </div>
+              </div>
+
+              <!-- Cột tâm thư cảm ơn -->
+              <div class="gratitude-content">
+                <p class="script-subtitle">Gửi những người yêu thương,</p>
+                <h2 class="serif-title">Lời Cảm Ơn Từ Đáy Lòng</h2>
+
+                <!-- Bộ lọc xem lời cảm ơn theo đối tượng -->
+                <div class="gratitude-pills" role="tablist" aria-label="Chọn lời tri ân">
+                  <button class="pill-btn active" type="button" data-gratitude="all">Tâm thư chung</button>
+                  <button class="pill-btn" type="button" data-gratitude="family">Gia đình &amp; Người thân</button>
+                  <button class="pill-btn" type="button" data-gratitude="friends">Bạn bè &amp; Đồng hành</button>
+                </div>
+
+                <div class="letter-box" id="gratitudeLetterBox">
+                  <p class="letter-salutation" id="letterSalutation">Thân gửi Gia đình, Người thân và những Người bạn tuyệt vời,</p>
+                  <p class="letter-paragraph" id="letterBody1">
+                    Hành trình đại học khép lại không chỉ bằng một tấm bằng, mà bằng biết bao kỷ niệm, sự trưởng thành và tình yêu thương mà mình may mắn nhận được.
+                  </p>
+                  <p class="letter-paragraph" id="letterBody2">
+                    Cảm ơn bố mẹ và gia đình đã luôn là điểm tựa vững chắc nhất. Cảm ơn những người bạn đã cùng thức trắng chạy deadline, cùng sẻ chia vui buồn và tiếp thêm động lực để mình đi trọn chặng đường thanh xuân rực rỡ này.
+                  </p>
+                  <p class="letter-paragraph highlight-invite" id="letterBody3">
+                    Sự hiện diện của bạn trong buổi lễ tốt nghiệp sắp tới chính là món quà ý nghĩa và trọn vẹn nhất đối với mình!
+                  </p>
+                  <div class="letter-signature-row">
+                    <div>
+                      <span class="sig-caption">Trân trọng &amp; Yêu thương,</span>
+                      <div class="handwritten-sig" id="gradSignature">Minh Thành</div>
+                    </div>
+                    <div class="wax-seal" title="Thiệp mời chính thức">
+                      <span>2026</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="page-cta-row">
+                  <button class="gold-btn next-trigger-btn" type="button" data-goto="1">
+                    <span>Lật sang Trang 2: Kỷ niệm &amp; Gửi lời chúc</span>
+                    <span class="btn-arrow">→</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-footer-bar">
+              <span>Trang 1 / 4 • Lời Tri Ân</span>
+              <button class="corner-curl-btn" type="button" data-goto="1" title="Lật sang trang 2">
+                Lật trang tiếp ➔
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TRANG 2: HÌNH ẢNH KỶ NIỆM & GHI LỜI CHÚC ONLINE ================= -->
+        <section class="book-page" data-page-index="1" aria-label="Trang 2: Hình ảnh kỷ niệm và ghi lời chúc">
+          <div class="page-inner">
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+
+            <div class="page-header-tag">
+              <span class="line-deco"></span>
+              <span>MEMORIES &amp; WISHES • TRANG 02 / 04</span>
+              <span class="line-deco"></span>
+            </div>
+
+            <div class="page-2-grid">
+              <!-- Cột trái: Album ảnh kỷ niệm Polaroid -->
+              <div class="memories-column">
+                <div class="section-heading-compact">
+                  <p class="script-subtitle">Hành trình thanh xuân</p>
+                  <h2 class="serif-title">Những Khung Hình Kỷ Niệm</h2>
+                  <p class="helper-note">Chạm vào từng bức ảnh để phóng to xem chi tiết</p>
+                </div>
+
+                <div class="polaroid-grid" id="polaroidGallery">
+                  <!-- Render tự động từ script.js (hoặc fallback mặc định) -->
+                </div>
+              </div>
+
+              <!-- Cột phải: Ghi lời chúc online -->
+              <div class="wish-column">
+                <div class="wish-card-container">
+                  <div class="wish-card-header">
+                    <span class="wish-badge">💌 Gửi Lời Chúc Online</span>
+                    <h3 class="serif-subtitle">Lưu Bút Chúc Mừng Tốt Nghiệp</h3>
+                    <p class="wish-desc">
+                      Đôi dòng nhắn gửi của bạn sẽ được chuyển thẳng về sổ lưu bút cá nhân của mình làm kỷ niệm mãi về sau.
+                    </p>
+                  </div>
+
+                  <form id="wishForm" class="luxury-form">
+                    <div class="form-row-2">
+                      <div class="form-group">
+                        <label for="wishSenderName">Tên của bạn <span class="req">*</span></label>
+                        <input
+                          type="text"
+                          id="wishSenderName"
+                          name="senderName"
+                          placeholder="VD: Lan Anh, Chú Tư..."
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="wishRelation">Mối quan hệ</label>
+                        <select id="wishRelation" name="relation">
+                          <option value="Bạn bè thân thiết">Bạn bè thân thiết</option>
+                          <option value="Gia đình / Người thân">Gia đình / Người thân</option>
+                          <option value="Bạn cùng lớp / Đại học">Bạn cùng lớp / Đại học</option>
+                          <option value="Anh chị em / Đồng nghiệp">Anh chị em / Đồng nghiệp</option>
+                          <option value="Người thương">Người thương ❤️</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Chọn biểu tượng gửi kèm</label>
+                      <div class="sticker-picker" id="stickerPicker">
+                        <button type="button" class="sticker-chip active" data-sticker="🎓 Chúc mừng Tân khoa!">🎓 Tân khoa</button>
+                        <button type="button" class="sticker-chip" data-sticker="💐 Thành công rực rỡ!">💐 Thành công</button>
+                        <button type="button" class="sticker-chip" data-sticker="🚀 Bay cao vươn xa!">🚀 Vươn xa</button>
+                        <button type="button" class="sticker-chip" data-sticker="💖 Luôn hạnh phúc nhé!">💖 Hạnh phúc</button>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="wishMessage">Lời chúc gửi tới mình <span class="req">*</span></label>
+                      <textarea
+                        id="wishMessage"
+                        name="message"
+                        rows="3"
+                        placeholder="Viết lời chúc tốt nghiệp hoặc kỷ niệm đáng nhớ nhất của hai đứa mình..."
+                        required
+                      ></textarea>
+                    </div>
+
+                    <!-- Gợi ý lời chúc nhanh -->
+                    <div class="quick-wish-suggestions">
+                      <span class="suggest-label">Gợi ý nhanh:</span>
+                      <button type="button" class="suggest-chip" data-text="Chúc mừng tốt nghiệp nhé! Chúc hành trình phía trước luôn rực rỡ và gặt hái thật nhiều thành công!">Chúc thành công rực rỡ</button>
+                      <button type="button" class="suggest-chip" data-text="Tự hào về bạn lắm! Chúc tân cử nhân luôn giữ vững đam mê và sớm đạt được mọi mục tiêu lớn nhé!">Tự hào về bạn</button>
+                    </div>
+
+                    <button type="submit" class="gold-btn full-width" id="submitWishBtn">
+                      <span>✨ Gửi Lời Chúc Tới Tân Cử Nhân</span>
+                    </button>
+
+                    <div class="form-status-msg" id="wishStatusMsg" role="status" aria-live="polite"></div>
+                  </form>
+
+                  <!-- Hiển thị lời chúc bạn vừa gửi trên trình duyệt -->
+                  <div class="recent-sent-box" id="recentSentBox" hidden>
+                    <div class="recent-sent-title">💌 Lời chúc bạn vừa gửi:</div>
+                    <div class="recent-sent-list" id="recentSentList"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-footer-bar">
+              <button class="corner-curl-btn prev" type="button" data-goto="0">
+                ← Quay lại Trang 1
+              </button>
+              <span>Trang 2 / 4 • Kỷ Niệm &amp; Lưu Bút</span>
+              <button class="corner-curl-btn" type="button" data-goto="2">
+                Sang Trang 3: Thông tin lễ ➔
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TRANG 3: THÔNG TIN BUỔI LỄ & LIÊN HỆ ================= -->
+        <section class="book-page" data-page-index="2" aria-label="Trang 3: Thông tin buổi lễ và liên hệ">
+          <div class="page-inner">
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+
+            <div class="page-header-tag">
+              <span class="line-deco"></span>
+              <span>CEREMONY &amp; CONTACT • TRANG 03 / 04</span>
+              <span class="line-deco"></span>
+            </div>
+
+            <div class="section-heading-center">
+              <p class="script-subtitle">Trân trọng kính mời</p>
+              <h2 class="serif-title">Thông Tin Buổi Lễ Tốt Nghiệp</h2>
+            </div>
+
+            <!-- Đồng hồ đếm ngược -->
+            <div class="countdown-banner" aria-label="Đếm ngược tới lễ tốt nghiệp">
+              <div class="cd-item">
+                <span class="cd-num" id="cdDays">00</span>
+                <span class="cd-label">Ngày</span>
+              </div>
+              <span class="cd-sep">:</span>
+              <div class="cd-item">
+                <span class="cd-num" id="cdHours">00</span>
+                <span class="cd-label">Giờ</span>
+              </div>
+              <span class="cd-sep">:</span>
+              <div class="cd-item">
+                <span class="cd-num" id="cdMinutes">00</span>
+                <span class="cd-label">Phút</span>
+              </div>
+              <span class="cd-sep">:</span>
+              <div class="cd-item">
+                <span class="cd-num" id="cdSeconds">00</span>
+                <span class="cd-label">Giây</span>
+              </div>
+            </div>
+
+            <div class="page-3-grid">
+              <!-- Cột Thời gian & Địa điểm -->
+              <div class="event-details-card">
+                <div class="info-block">
+                  <div class="info-icon">🗓️</div>
+                  <div class="info-text">
+                    <span class="info-label">Thời gian tổ chức</span>
+                    <h3 class="info-main" id="eventDateTimeText">08:30 - 11:30 • Chủ Nhật, 20/12/2026</h3>
+                    <p class="info-sub" id="eventPhotoTimeNote">Khung giờ chụp ảnh đẹp nhất với mình: <strong>09:30 – 11:30</strong></p>
+                  </div>
+                </div>
+
+                <div class="info-block">
+                  <div class="info-icon">📍</div>
+                  <div class="info-text">
+                    <span class="info-label">Địa điểm</span>
+                    <h3 class="info-main" id="eventVenueName">Hội trường Lớn (Nhà A1) - Trường Đại học</h3>
+                    <p class="info-sub" id="eventVenueAddress">Số 1 Đại Cồ Việt / Xuân Thủy, Hà Nội (hoặc địa chỉ trường của bạn)</p>
+                  </div>
+                </div>
+
+                <!-- Lịch trình tóm tắt -->
+                <div class="timeline-mini">
+                  <div class="timeline-step">
+                    <span class="tl-time" id="tlTime1">08:00</span>
+                    <span class="tl-dot"></span>
+                    <span class="tl-desc" id="tlDesc1">Làm lễ trao bằng bên trong Hội trường</span>
+                  </div>
+                  <div class="timeline-step highlight">
+                    <span class="tl-time" id="tlTime2">09:30</span>
+                    <span class="tl-dot"></span>
+                    <span class="tl-desc" id="tlDesc2">Ra sảnh chính đón khách &amp; Chụp ảnh kỷ niệm</span>
+                  </div>
+                  <div class="timeline-step">
+                    <span class="tl-time" id="tlTime3">11:30</span>
+                    <span class="tl-dot"></span>
+                    <span class="tl-desc" id="tlDesc3">Giao lưu thân mật &amp; Kết thúc buổi lễ</span>
+                  </div>
+                </div>
+
+                <div class="action-buttons-row">
+                  <a
+                    id="googleMapsBtn"
+                    href="https://maps.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="gold-btn"
+                  >
+                    📍 Xem Chỉ Đường Google Maps
+                  </a>
+                  <button type="button" id="addToCalendarBtn" class="outline-gold-btn">
+                    📅 Lưu Vào Lịch Điện Thoại
+                  </button>
+                </div>
+              </div>
+
+              <!-- Cột Liên hệ khi tới nơi -->
+              <div class="contact-card">
+                <div class="contact-card-header">
+                  <span class="contact-tag">📞 Liên Hệ Đón Tiếp</span>
+                  <h3 class="serif-subtitle">Gọi Cho Mình Khi Bạn Tới Nhé!</h3>
+                  <p class="contact-desc">
+                    Khuôn viên trường hôm lễ khá đông, khi tới cổng bạn cứ nhắn hoặc gọi để mình/người thân ra đón tận nơi nha.
+                  </p>
+                </div>
+
+                <div class="contact-list">
+                  <div class="contact-item">
+                    <div class="contact-item-left">
+                      <span class="c-badge">Chính chủ</span>
+                      <strong id="contactMainName">Minh Thành</strong>
+                      <span class="c-phone" id="contactMainPhone">0912 345 678</span>
+                    </div>
+                    <div class="contact-item-actions">
+                      <a id="callMainBtn" href="tel:0912345678" class="mini-action-btn call">Gọi ngay</a>
+                      <button type="button" class="mini-action-btn copy" data-copy="0912345678">Copy SĐT</button>
+                    </div>
+                  </div>
+
+                  <div class="contact-item">
+                    <div class="contact-item-left">
+                      <span class="c-badge secondary">Hỗ trợ đón khách</span>
+                      <strong id="contactBackupName">Bạn thân / Người nhà</strong>
+                      <span class="c-phone" id="contactBackupPhone">0987 654 321</span>
+                    </div>
+                    <div class="contact-item-actions">
+                      <a id="callBackupBtn" href="tel:0987654321" class="mini-action-btn call">Gọi ngay</a>
+                      <button type="button" class="mini-action-btn copy" data-copy="0987654321">Copy SĐT</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="social-links-row">
+                  <a id="zaloLinkBtn" href="https://zalo.me/0912345678" target="_blank" rel="noopener noreferrer" class="social-pill">
+                    💬 Nhắn Zalo
+                  </a>
+                  <a id="fbLinkBtn" href="https://m.me/" target="_blank" rel="noopener noreferrer" class="social-pill">
+                    💙 Nhắn Messenger
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-footer-bar">
+              <button class="corner-curl-btn prev" type="button" data-goto="1">
+                ← Quay lại Trang 2
+              </button>
+              <span>Trang 3 / 4 • Thông Tin &amp; Liên Hệ</span>
+              <button class="corner-curl-btn" type="button" data-goto="3">
+                Sang Trang 4: Lời nhắn &amp; Xác nhận ➔
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TRANG 4: LỜI NHẮN, THÔNG TIN LƯU Ý & XÁC NHẬN THAM DỰ ================= -->
+        <section class="book-page" data-page-index="3" aria-label="Trang 4: Lời nhắn và thông tin thêm">
+          <div class="page-inner">
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+
+            <div class="page-header-tag">
+              <span class="line-deco"></span>
+              <span>FINAL NOTES &amp; RSVP • TRANG 04 / 04</span>
+              <span class="line-deco"></span>
+            </div>
+
+            <div class="page-4-grid">
+              <!-- Cột Trái: Lời nhắn nhủ & Lưu ý hữu ích -->
+              <div class="notes-column">
+                <p class="script-subtitle">Đôi điều nhắn gửi</p>
+                <h2 class="serif-title">Lời Nhắn &amp; Cẩm Nang Nhỏ</h2>
+
+                <div class="closing-quote-box">
+                  <p id="closingNoteText">
+                    “Sự có mặt của bạn, dù chỉ vài phút ghé qua chụp cùng nhau một tấm hình và trao một cái ôm, cũng đã làm ngày tốt nghiệp của mình trở nên trọn vẹn hơn bao giờ hết. Bạn không cần chuẩn bị quà cầu kỳ đâu, chỉ cần mang theo nụ cười thật tươi đến với mình là đủ rồi!”
+                  </p>
+                </div>
+
+                <div class="tips-cards">
+                  <div class="tip-card">
+                    <span class="tip-icon">🛵</span>
+                    <div>
+                      <h4>Gửi xe &amp; Di chuyển</h4>
+                      <p id="tipParkingText">Bạn gửi xe tại Nhà xe Cổng chính (hoặc Cổng số 2), sau đó đi bộ khoảng 100m vào sảnh Hội trường Lớn.</p>
+                    </div>
+                  </div>
+
+                  <div class="tip-card">
+                    <span class="tip-icon">👗</span>
+                    <div>
+                      <h4>Gợi ý Trang phục (Dresscode)</h4>
+                      <p id="tipDresscodeText">Trang phục tự do, lịch sự. Tone Trắng, Kem, Be, Pastel hoặc Đen sẽ lên hình cực kỳ nổi bật bên cạnh áo cử nhân!</p>
+                    </div>
+                  </div>
+
+                  <div class="tip-card">
+                    <span class="tip-icon">🌤️</span>
+                    <div>
+                      <h4>Lưu ý nhỏ</h4>
+                      <p id="tipExtraText">Mình đã chuẩn bị sẵn nước mát, quạt cầm tay và phụ kiện chụp ảnh xinh xắn chờ đón mọi người.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cột Phải: Xác nhận tham dự (RSVP) gửi về Google Sheet / Email -->
+              <div class="rsvp-column">
+                <div class="rsvp-card">
+                  <span class="wish-badge">✨ Hẹn Gặp Bạn Tại Buổi Lễ</span>
+                  <h3 class="serif-subtitle">Xác Nhận Tham Dự (RSVP)</h3>
+                  <p class="wish-desc">
+                    Cho mình biết lịch trình của bạn để mình sắp xếp đón tiếp chu đáo nhất nhé!
+                  </p>
+
+                  <form id="rsvpForm" class="luxury-form">
+                    <div class="form-row-2">
+                      <div class="form-group">
+                        <label for="rsvpName">Tên của bạn <span class="req">*</span></label>
+                        <input type="text" id="rsvpName" name="guestName" placeholder="Nhập tên của bạn..." required />
+                      </div>
+                      <div class="form-group">
+                        <label for="rsvpPhone">Số điện thoại (để mình đón)</label>
+                        <input type="tel" id="rsvpPhone" name="guestPhone" placeholder="VD: 09xx xxx xxx" />
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Bạn sẽ đến chung vui cùng mình chứ? <span class="req">*</span></label>
+                      <div class="attendance-options">
+                        <label class="radio-card">
+                          <input type="radio" name="attendance" value="Chắc chắn sẽ đến chung vui!" checked />
+                          <span class="radio-box">🎉 Chắc chắn mình sẽ đến!</span>
+                        </label>
+                        <label class="radio-card">
+                          <input type="radio" name="attendance" value="Mình sẽ cố gắng sắp xếp ghé qua" />
+                          <span class="radio-box">⏳ Mình sẽ cố gắng sắp xếp</span>
+                        </label>
+                        <label class="radio-card">
+                          <input type="radio" name="attendance" value="Tiếc quá mình bận mất rồi, chúc mừng bạn nhé!" />
+                          <span class="radio-box">💌 Bận mất rồi, gửi lời chúc từ xa</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-row-2">
+                      <div class="form-group">
+                        <label for="rsvpTimeSlot">Khung giờ dự kiến bạn ghé</label>
+                        <select id="rsvpTimeSlot" name="arrivalTime">
+                          <option value="09:30 - 10:15">09:30 - 10:15</option>
+                          <option value="10:15 - 11:00">10:15 - 11:00</option>
+                          <option value="11:00 - 11:30">11:00 - 11:30</option>
+                          <option value="Chưa rõ giờ chính xác">Chưa rõ giờ chính xác</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="rsvpGuests">Đi cùng mấy người?</label>
+                        <select id="rsvpGuests" name="guestCount">
+                          <option value="Đi 1 mình">Đi 1 mình</option>
+                          <option value="Đi 2 người">Đi 2 người</option>
+                          <option value="Đi theo nhóm bạn">Đi theo nhóm bạn</option>
+                          <option value="Đi cùng gia đình">Đi cùng gia đình</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="rsvpNote">Lời nhắn thêm cho mình (nếu có)</label>
+                      <input
+                        type="text"
+                        id="rsvpNote"
+                        name="extraNote"
+                        placeholder="VD: Khi tới cổng số 2 mình gọi nhé..."
+                      />
+                    </div>
+
+                    <button type="submit" class="gold-btn full-width" id="submitRsvpBtn">
+                      <span>🎓 Gửi Xác Nhận Cho Tân Cử Nhân</span>
+                    </button>
+
+                    <div class="form-status-msg" id="rsvpStatusMsg" role="status" aria-live="polite"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-footer-bar">
+              <button class="corner-curl-btn prev" type="button" data-goto="2">
+                ← Quay lại Trang 3
+              </button>
+              <span>Trang 4 / 4 • Hẹn Gặp Lại Bạn!</span>
+              <button class="corner-curl-btn" type="button" data-goto="0">
+                ↺ Về lại Trang Bìa (Trang 1)
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Nút lật trang phải (Desktop) -->
+    <button class="side-nav-btn next-side-btn" id="nextPageSideBtn" type="button" aria-label="Trang tiếp theo">
+      <span class="side-nav-text">Lật trang</span>
+      <span class="arrow-icon">→</span>
+    </button>
+  </main>
+
+  <!-- Thanh điều hướng dưới cùng cho điện thoại & điều khiển nhanh -->
+  <footer class="bottom-dock">
+    <button type="button" class="dock-arrow" id="dockPrevBtn" disabled>← Trang trước</button>
+    <div class="dock-dots" role="tablist" aria-label="Chấm chuyển trang">
+      <button type="button" class="dock-dot active" data-page="0" aria-label="Trang 1"></button>
+      <button type="button" class="dock-dot" data-page="1" aria-label="Trang 2"></button>
+      <button type="button" class="dock-dot" data-page="2" aria-label="Trang 3"></button>
+      <button type="button" class="dock-dot" data-page="3" aria-label="Trang 4"></button>
+    </div>
+    <button type="button" class="dock-arrow primary" id="dockNextBtn">Trang tiếp →</button>
+  </footer>
+
+  <!-- Lightbox phóng to ảnh kỷ niệm (Trang 2) -->
+  <div class="lightbox-modal" id="lightboxModal" hidden aria-modal="true" role="dialog">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-content">
+      <button type="button" class="lightbox-close" id="lightboxCloseBtn" aria-label="Đóng ảnh">✕</button>
+      <img id="lightboxImg" src="" alt="Ảnh kỷ niệm phóng to" />
+      <div class="lightbox-caption-bar">
+        <span class="lb-date" id="lightboxDate"></span>
+        <p class="lb-caption" id="lightboxCaption"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thông báo Toast -->
+  <div class="toast-notification" id="toastNotification" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
