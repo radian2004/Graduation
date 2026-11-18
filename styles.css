@@ -576,13 +576,245 @@ body {
 .grad-school {
   font-size: 0.82rem;
   color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.school-line {
+  display: block;
+}
+
+.school-line + .school-line {
+  font-weight: 600;
+  color: var(--text-body);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   TRANG MỞ ĐẦU (BÌA PHONG BÌ THIỆP MỜI CÁ NHÂN HÓA)
+   ========================================================================== */
+.welcome-cover-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: radial-gradient(circle at 50% 30%, rgba(58, 43, 28, 0.94) 0%, rgba(24, 18, 12, 0.97) 85%);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.6s;
+}
+
+.welcome-cover-overlay.closing {
+  opacity: 0;
+  transform: scale(1.06);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-cover-overlay[hidden] {
+  display: none;
+}
+
+.welcome-cover-card {
+  position: relative;
+  max-width: 560px;
+  width: 100%;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(223, 190, 127, 0.22), transparent 55%),
+    var(--paper-cream);
+  border: 2px solid var(--gold-light);
+  border-radius: 22px;
+  padding: 32px 30px 24px;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65), inset 0 0 0 5px var(--paper-cream), inset 0 0 0 6.5px rgba(168, 118, 36, 0.28);
+  animation: welcomeCardPop 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes welcomeCardPop {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.welcome-top-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.welcome-cap-emblem {
+  font-size: 2.3rem;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.welcome-invite-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.welcome-guest-box {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #f6ebd6 100%);
+  border: 1.5px solid var(--gold-primary);
+  border-radius: 16px;
+  padding: 10px 26px 12px;
+  margin-bottom: 14px;
+  min-width: 240px;
+  max-width: 100%;
+  box-shadow: 0 8px 22px rgba(134, 90, 16, 0.12);
+}
+
+.welcome-dear-prefix {
+  font-family: var(--font-script);
+  font-size: 1.75rem;
+  color: var(--gold-deep);
+}
+
+.welcome-guest-name {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.01em;
+}
+
+.welcome-message-lead {
+  font-size: 0.86rem;
+  color: var(--text-body);
+  line-height: 1.5;
+  max-width: 420px;
+  margin: 0 auto 14px;
+}
+
+.welcome-grad-block {
+  background: var(--paper-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+}
+
+.welcome-grad-degree {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-deep);
+  margin-bottom: 3px;
+}
+
+.welcome-grad-name {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.welcome-grad-school {
+  font-size: 0.81rem;
+  color: var(--text-muted);
   line-height: 1.45;
 }
 
-/* Bộ lọc tâm thư cảm ơn */
+.welcome-meta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.welcome-meta-pill {
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: var(--text-body);
+  background: var(--paper-cream-soft);
+  border: 1px solid rgba(168, 118, 36, 0.3);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.welcome-open-btn {
+  padding: 13px 32px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 10px 26px rgba(134, 90, 16, 0.35);
+}
+
+.link-creator-wrap {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(168, 118, 36, 0.3);
+}
+
+.link-creator-toggle {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.link-creator-toggle:hover {
+  color: var(--gold-deep);
+}
+
+.link-creator-panel {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.link-creator-panel[hidden] {
+  display: none;
+}
+
+.link-creator-panel input {
+  flex: 1;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-gold);
+  background: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-dark);
+}
+
+/* Bộ lọc & khung tâm thư cảm ơn (Căn giữa trang trọng) */
+.gratitude-content {
+  text-align: center;
+}
+
 .gratitude-pills {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
   margin-bottom: 12px;
 }
@@ -612,11 +844,12 @@ body {
 
 .letter-box {
   background: linear-gradient(180deg, #ffffff 0%, #faf3e6 100%);
-  border: 1px solid rgba(168, 118, 36, 0.35);
-  border-left: 4px solid var(--gold-primary);
-  border-radius: 12px;
-  padding: 16px 20px;
+  border: 1.5px solid rgba(168, 118, 36, 0.35);
+  border-top: 3.5px solid var(--gold-primary);
+  border-radius: 14px;
+  padding: 18px 24px;
   margin-bottom: 14px;
+  text-align: center;
   box-shadow: 0 6px 18px rgba(77, 62, 48, 0.05);
 }
 
@@ -625,19 +858,26 @@ body {
   font-weight: 700;
   font-style: italic;
   color: var(--text-dark);
-  margin-bottom: 8px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .letter-paragraph {
   font-size: 0.89rem;
-  line-height: 1.62;
+  line-height: 1.65;
   color: var(--text-body);
-  margin-bottom: 8px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .letter-paragraph.highlight-invite {
   color: var(--gold-deep);
   font-weight: 600;
+}
+
+.page-cta-row {
+  display: flex;
+  justify-content: center;
 }
 
 .letter-signature-row {
@@ -1368,22 +1608,24 @@ body {
 
 .closing-quote-box {
   background: linear-gradient(135deg, #ffffff 0%, #f6ecda 100%);
-  border: 1px solid var(--border-gold);
+  border: 1.5px solid var(--border-gold);
   border-radius: 12px;
-  padding: 14px 18px;
+  padding: 16px 20px;
   font-size: 0.94rem;
   font-style: italic;
-  line-height: 1.6;
+  line-height: 1.62;
   color: var(--text-dark);
+  text-align: center;
   margin-bottom: 14px;
 }
 
 .farewell-signoff-card {
   background: var(--paper-card);
   border: 1.5px solid var(--border-gold);
-  border-left: 4px solid var(--gold-primary);
+  border-top: 3.5px solid var(--gold-primary);
   border-radius: 14px;
   padding: 18px 20px;
+  text-align: center;
   box-shadow: 0 8px 24px rgba(77, 62, 48, 0.06);
   flex: 1;
   display: flex;
@@ -1394,12 +1636,14 @@ body {
 .farewell-text {
   font-size: 0.88rem;
   color: var(--text-body);
-  line-height: 1.58;
+  line-height: 1.6;
+  text-align: center;
   margin-top: 6px;
 }
 
 .farewell-actions {
   margin-top: 14px;
+  justify-content: center;
 }
 
 .tips-cards {

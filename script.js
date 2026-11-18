@@ -4,11 +4,15 @@
  * ============================================================================
  */
 const GRADUATION_CONFIG = {
+  // 0. Tên khách mời mặc định ở Trang Mở Đầu (Khi gửi link không kèm ?to=Tên_Bạn thì sẽ hiện "Dear Friends")
+  defaultGuestName: "Friends",
+
   // 1. Thông tin cá nhân (Trang 1)
   graduateName: "Nguyễn Thanh An",
   signatureName: "Thanh An",
   degreeTitle: "Tân Cử Nhân ngành Kỹ thuật Máy tính",
-  university: "Trường Đại học Công nghệ thông tin • Khoa Kỹ thuật Máy tính",
+  university: "Trường Đại học Công nghệ thông tin",
+  faculty: "Khoa Kỹ thuật Máy tính",
   heroPhotoUrl:
     "https://drive.google.com/file/d/1kQLFccvk18ddiYtkZkSxBr92OZJQO9bn/view?usp=sharing",
 
@@ -152,12 +156,132 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
+  // Helper tách Trường & Khoa thành 2 dòng riêng biệt
+  function renderSchoolTwoLines(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    let schoolLine1 = (GRADUATION_CONFIG.university || "").trim();
+    let schoolLine2 = (GRADUATION_CONFIG.faculty || "").trim();
+
+    if (!schoolLine2 && schoolLine1.includes("•")) {
+      const parts = schoolLine1.split("•").map((s) => s.trim());
+      schoolLine1 = parts[0] || "";
+      schoolLine2 = parts.slice(1).join(" • ");
+    }
+
+    if (schoolLine2) {
+      el.innerHTML = `<span class="school-line">${escapeHtml(schoolLine1)}</span><span class="school-line">${escapeHtml(schoolLine2)}</span>`;
+    } else {
+      el.innerHTML = `<span class="school-line">${escapeHtml(schoolLine1)}</span>`;
+    }
+  }
+
+  // Helper lấy tên người bạn từ đường link (?to=Tên_Bạn hoặc ?name=Tên_Bạn), nếu không có trả về "Friends"
+  function getRecipientFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const rawParam =
+      params.get("to") ||
+      params.get("name") ||
+      params.get("friend") ||
+      params.get("ban") ||
+      params.get("guest") ||
+      "";
+    const cleaned = rawParam.trim();
+    return {
+      name: cleaned || GRADUATION_CONFIG.defaultGuestName || "Friends",
+      isCustomFriend: Boolean(cleaned)
+    };
+  }
+
+  // Khởi tạo Trang Mở Đầu (Welcome Cover) & Cá nhân hóa tên người bạn
+  function initWelcomeCoverAndGuest() {
+    const { name: guestName, isCustomFriend } = getRecipientFromUrl();
+
+    setText("welcomeGuestName", guestName);
+    setText("welcomeGradDegree", GRADUATION_CONFIG.degreeTitle);
+    setText("welcomeGradName", GRADUATION_CONFIG.graduateName);
+    renderSchoolTwoLines("welcomeGradSchool");
+    setText("welcomeDateTimePill", `🗓️ ${GRADUATION_CONFIG.eventDateTimeDisplay}`);
+    setText("welcomeVenuePill", `📍 ${GRADUATION_CONFIG.eventVenueName}`);
+
+    // Cá nhân hóa lời chào ở Trang 1 & điền sẵn tên ở Trang 2 nếu có tên bạn cụ thể
+    if (isCustomFriend) {
+      setText("page1GuestGreeting", `Gửi ${guestName},`);
+      setText(
+        "letterSalutation",
+        `Thân gửi ${guestName} cùng Gia đình và những Người bạn tuyệt vời,`
+      );
+      const wishSenderInput = document.getElementById("wishSenderName");
+      if (wishSenderInput && !wishSenderInput.value) {
+        wishSenderInput.value = guestName;
+      }
+      // Ẩn nút tạo link khi khách mở link được cá nhân hóa
+      const linkCreatorWrap = document.getElementById("linkCreatorWrap");
+      if (linkCreatorWrap) linkCreatorWrap.hidden = true;
+    }
+
+    // Nút "Mở Thiệp Mời" -> Mở bìa thiệp & Phát nhạc nền ngay lập tức
+    const welcomeModal = document.getElementById("welcomeCoverModal");
+    const openBtn = document.getElementById("openInvitationBtn");
+    if (openBtn && welcomeModal) {
+      openBtn.addEventListener("click", () => {
+        if (bgMusicAudio && bgMusicAudio.paused) {
+          bgMusicAudio.play().catch(() => {});
+        }
+        welcomeModal.classList.add("closing");
+        setTimeout(() => {
+          welcomeModal.hidden = true;
+        }, 600);
+      });
+    }
+
+    // Công cụ tạo nhanh link gửi riêng cho từng người bạn (?to=Tên_Bạn)
+    const toggleBtn = document.getElementById("toggleLinkCreatorBtn");
+    const panel = document.getElementById("linkCreatorPanel");
+    const input = document.getElementById("customFriendInput");
+    const copyBtn = document.getElementById("copyCustomLinkBtn");
+
+    if (toggleBtn && panel) {
+      toggleBtn.addEventListener("click", () => {
+        panel.hidden = !panel.hidden;
+        if (!panel.hidden && input) input.focus();
+      });
+    }
+
+    if (copyBtn && input) {
+      const handleCopyLink = () => {
+        const friendVal = input.value.trim();
+        const urlObj = new URL(window.location.href);
+        if (friendVal) {
+          urlObj.searchParams.set("to", friendVal);
+        } else {
+          urlObj.searchParams.delete("to");
+        }
+        const finalLink = urlObj.toString();
+        navigator.clipboard?.writeText(finalLink);
+        showToast(
+          friendVal
+            ? `🔗 Đã copy link thiệp mời gửi riêng cho: ${friendVal}`
+            : "🔗 Đã copy link thiệp mời chung (Dear Friends)"
+        );
+      };
+
+      copyBtn.addEventListener("click", handleCopyLink);
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          handleCopyLink();
+        }
+      });
+    }
+  }
+
   // 1. Áp dụng thông tin từ GRADUATION_CONFIG lên giao diện
   function applyConfiguration() {
     setText("headerGradName", `Lễ Tốt Nghiệp • ${GRADUATION_CONFIG.signatureName}`);
     setText("gradDegreeTitle", GRADUATION_CONFIG.degreeTitle);
     setText("gradFullName", GRADUATION_CONFIG.graduateName);
-    setText("gradUniversity", GRADUATION_CONFIG.university);
+    renderSchoolTwoLines("gradUniversity");
     setText("gradSignature", GRADUATION_CONFIG.signatureName);
     setText("closingSignature", GRADUATION_CONFIG.signatureName);
 
@@ -419,8 +543,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const key = btn.dataset.gratitude;
       const content = GRADUATION_CONFIG.gratitudeLetters[key];
+      const { name: guestName, isCustomFriend } = getRecipientFromUrl();
       if (content) {
-        setText("letterSalutation", content.salutation);
+        if (isCustomFriend && (key === "all" || key === "friends")) {
+          setText(
+            "letterSalutation",
+            key === "friends"
+              ? `Gửi ${guestName} - Người bạn đồng hành năm tháng thanh xuân,`
+              : `Thân gửi ${guestName} cùng Gia đình và những Người bạn tuyệt vời,`
+          );
+        } else {
+          setText("letterSalutation", content.salutation);
+        }
         setText("letterBody1", content.p1);
         setText("letterBody2", content.p2);
         setText("letterBody3", content.p3);
@@ -674,6 +808,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Khởi chạy
   applyConfiguration();
+  initWelcomeCoverAndGuest();
   initBackgroundMusic();
   renderMemories();
   renderRecentSentWishes();

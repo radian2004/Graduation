@@ -51,6 +51,71 @@
   <!-- Nhạc nền tự động phát xuyên suốt -->
   <audio id="bgMusicAudio" src="music.mp3" autoplay loop preload="auto"></audio>
 
+  <!-- ================= TRANG MỞ ĐẦU (BÌA PHONG BÌ THIỆP MỜI CÁ NHÂN HÓA) ================= -->
+  <div class="welcome-cover-overlay" id="welcomeCoverModal" role="dialog" aria-modal="true" aria-label="Thiệp mời lễ tốt nghiệp">
+    <div class="welcome-cover-card">
+      <div class="corner-ornament top-left"></div>
+      <div class="corner-ornament top-right"></div>
+      <div class="corner-ornament bottom-left"></div>
+      <div class="corner-ornament bottom-right"></div>
+
+      <div class="welcome-top-tag">
+        <span class="line-deco"></span>
+        <span>GRADUATION INVITATION • CLASS OF 2026</span>
+        <span class="line-deco"></span>
+      </div>
+
+      <div class="welcome-cap-emblem" aria-hidden="true">🎓</div>
+      <p class="welcome-invite-label">TRÂN TRỌNG KÍNH MỜI</p>
+
+      <!-- Khung hiển thị tên người bạn cụ thể (Mặc định: Friends) -->
+      <div class="welcome-guest-box">
+        <span class="welcome-dear-prefix">Dear</span>
+        <h2 class="welcome-guest-name" id="welcomeGuestName">Friends</h2>
+      </div>
+
+      <p class="welcome-message-lead">
+        Đến chung vui và lưu giữ những khoảnh khắc ý nghĩa nhất tại <strong>Lễ Tốt Nghiệp</strong> của
+      </p>
+
+      <div class="welcome-grad-block">
+        <p class="welcome-grad-degree" id="welcomeGradDegree">Tân Cử Nhân ngành Kỹ thuật Máy tính</p>
+        <h1 class="welcome-grad-name" id="welcomeGradName">Nguyễn Thanh An</h1>
+        <p class="welcome-grad-school" id="welcomeGradSchool">
+          <span class="school-line">Trường Đại học Công nghệ thông tin</span>
+          <span class="school-line">Khoa Kỹ thuật Máy tính</span>
+        </p>
+      </div>
+
+      <div class="welcome-meta-pills">
+        <span class="welcome-meta-pill" id="welcomeDateTimePill">🗓️ 10:30 - 12:00 • Thứ Tư, 25/11/2026</span>
+        <span class="welcome-meta-pill" id="welcomeVenuePill">📍 Sảnh dưới tòa E (UIT)</span>
+      </div>
+
+      <button type="button" class="gold-btn welcome-open-btn" id="openInvitationBtn">
+        <span>✨ Mở Thiệp Mời</span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <!-- Công cụ nhỏ giúp chủ thiệp tạo nhanh link gửi riêng cho từng người bạn -->
+      <div class="link-creator-wrap" id="linkCreatorWrap">
+        <button type="button" class="link-creator-toggle" id="toggleLinkCreatorBtn">
+          🔗 Tạo link gửi riêng cho từng bạn
+        </button>
+        <div class="link-creator-panel" id="linkCreatorPanel" hidden>
+          <input
+            type="text"
+            id="customFriendInput"
+            placeholder="Nhập tên bạn (VD: Minh Khoa, Lan Anh...)"
+          />
+          <button type="button" class="mini-action-btn call" id="copyCustomLinkBtn">
+            Copy Link
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Khu vực Sách / Thiệp 3D Flipbook -->
   <main class="stage-wrapper">
     <!-- Nút lật trang trái (Desktop) -->
@@ -109,13 +174,16 @@
                 <div class="graduate-identity">
                   <p class="grad-role" id="gradDegreeTitle">Tân Cử Nhân ngành Kỹ thuật Máy tính</p>
                   <h1 class="grad-name" id="gradFullName">Nguyễn Thanh An</h1>
-                  <p class="grad-school" id="gradUniversity">Trường Đại học Công nghệ thông tin • Khoa Kỹ thuật Máy tính</p>
+                  <p class="grad-school" id="gradUniversity">
+                    <span class="school-line">Trường Đại học Công nghệ thông tin</span>
+                    <span class="school-line">Khoa Kỹ thuật Máy tính</span>
+                  </p>
                 </div>
               </div>
 
               <!-- Cột tâm thư cảm ơn -->
               <div class="gratitude-content">
-                <p class="script-subtitle">Gửi những người yêu thương,</p>
+                <p class="script-subtitle" id="page1GuestGreeting">Gửi những người yêu thương,</p>
                 <h2 class="serif-title">Lời Cảm Ơn Từ Đáy Lòng</h2>
 
                 <!-- Bộ lọc xem lời cảm ơn theo đối tượng -->
