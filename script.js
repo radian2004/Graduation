@@ -70,7 +70,7 @@ const GRADUATION_CONFIG = {
 
   // 4. Thông tin buổi lễ & Liên hệ (Trang 3)
   eventIsoDate: "2026-11-25T08:30:00+07:00", // Định dạng YYYY-MM-DDTHH:mm:ss+07:00 để đếm ngược
-  eventDateTimeDisplay: "10:30 - 12:00 • Chủ Nhật, 25/11/2026",
+  eventDateTimeDisplay: "10:30 - 12:00 • Thứ Tư, 25/11/2026",
   // eventPhotoTimeNote: "Khung giờ chụp ảnh đẹp nhất với mình: <strong>10:30 – 11:00</strong>",
   eventVenueName: "Sảnh dưới tòa E",
   eventVenueAddress: "Trường Đại học Công nghệ Thông tin, Đường Hàn Thuyên, P. Linh Xuân, Tp. Hồ Chí Minh",
@@ -91,7 +91,11 @@ const GRADUATION_CONFIG = {
   // - Cách 2 (Email miễn phí qua Web3Forms): Truy cập https://web3forms.com nhập email nhận Access Key rồi dán vào web3FormsAccessKey
   // (Chi tiết 3 bước cài đặt có sẵn trong file HUONG_DAN.md)
   googleSheetWebhookUrl: "https://script.google.com/macros/s/AKfycbwoI1wagPtWlH-SBxZHWNxX6gpjpmzLIF7EV-lA5iyD0yyQdhcpiRVNtGODCYTF6awrUA/exec",
-  web3FormsAccessKey: ""
+  web3FormsAccessKey: "",
+
+  // 6. NHẠC NỀN (Bạn dán link chia sẻ file MP3 trên Google Drive dạng https://drive.google.com/file/d/.../view?usp=sharing
+  // hoặc bỏ file nhạc vào thư mục dự án rồi điền "music.mp3")
+  backgroundMusicUrl: "https://drive.google.com/file/d/1AXOyS5fPRuDjilfrMutjm37NegZR6VmC/view?usp=sharing"
 };
 
 /* ============================================================================
@@ -170,7 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setText("eventDateTimeText", GRADUATION_CONFIG.eventDateTimeDisplay);
     const photoNoteEl = document.getElementById("eventPhotoTimeNote");
-    if (photoNoteEl) photoNoteEl.innerHTML = GRADUATION_CONFIG.eventPhotoTimeNote;
+    if (photoNoteEl) {
+      if (GRADUATION_CONFIG.eventPhotoTimeNote) {
+        photoNoteEl.innerHTML = GRADUATION_CONFIG.eventPhotoTimeNote;
+        photoNoteEl.hidden = false;
+      } else {
+        photoNoteEl.hidden = true;
+      }
+    }
     setText("eventVenueName", GRADUATION_CONFIG.eventVenueName);
     setText("eventVenueAddress", GRADUATION_CONFIG.eventVenueAddress);
 
@@ -202,51 +213,125 @@ document.addEventListener("DOMContentLoaded", () => {
     if (el && value) el.textContent = value;
   }
 
-  // 2. Tạo hiệu ứng âm thanh lật giấy dịu nhẹ bằng Web Audio API
-  // function playPageFlipSound() {
-  //   if (!soundEnabled) return;
-  //   try {
-  //     const AudioCtx = window.AudioContext || window.webkitAudioContext;
-  //     if (!AudioCtx) return;
-  //     const ctx = new AudioCtx();
-  //     const bufferSize = ctx.sampleRate * 0.14;
-  //     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-  //     const data = buffer.getChannelData(0);
-  //     for (let i = 0; i < bufferSize; i++) {
-  //       data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.045));
-  //     }
+  // 2. Quản lý Nhạc nền (Hỗ trợ cả link Google Drive lẫn file .mp3 trực tiếp)
+  const bgMusicAudio = document.getElementById("bgMusicAudio");
+  const bgMusicToggleBtn = document.getElementById("bgMusicToggleBtn");
+  const bgMusicIcon = document.getElementById("bgMusicIcon");
+  const bgMusicText = document.getElementById("bgMusicText");
+  const driveMusicWidget = document.getElementById("driveMusicWidget");
+  const driveMusicIframe = document.getElementById("driveMusicIframe");
+  const closeDriveMusicBtn = document.getElementById("closeDriveMusicBtn");
 
-  //     const noise = ctx.createBufferSource();
-  //     noise.buffer = buffer;
+  let isMusicPlaying = false;
+  let useDriveIframeFallback = false;
+  let hasAutoStarted = false;
 
-  //     const filter = ctx.createBiquadFilter();
-  //     filter.type = "bandpass";
-  //     filter.frequency.setValueAtTime(950, ctx.currentTime);
-  //     filter.Q.setValueAtTime(1.4, ctx.currentTime);
+  function initBackgroundMusic() {
+    const rawUrl = (GRADUATION_CONFIG.backgroundMusicUrl || "").trim();
+    if (!rawUrl || !bgMusicAudio) return;
 
-  //     const gain = ctx.createGain();
-  //     gain.gain.setValueAtTime(0.12, ctx.currentTime);
-  //     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.13);
+    const driveId = extractGoogleDriveId(rawUrl);
+    if (driveId) {
+      bgMusicAudio.src = `https://docs.google.com/uc?export=open&id=${driveId}`;
+      let audioFallbackStep = 0;
+      bgMusicAudio.onerror = () => {
+        audioFallbackStep += 1;
+        if (audioFallbackStep === 1) {
+          bgMusicAudio.src = `https://drive.google.com/uc?export=download&id=${driveId}`;
+        } else {
+          // Nếu Google Drive chặn phát ngầm qua thẻ <audio>, chuyển sang hộp phát nhúng chính thức của Google Drive
+          useDriveIframeFallback = true;
+        }
+      };
+    } else {
+      bgMusicAudio.src = rawUrl;
+    }
 
-  //     noise.connect(filter);
-  //     filter.connect(gain);
-  //     gain.connect(ctx.destination);
-  //     noise.start();
-  //   } catch {
-  //     // Bỏ qua nếu trình duyệt chặn tự phát âm thanh
-  //   }
-  // }
+    bgMusicAudio.volume = 0.65;
+  }
 
-  // Nút bật/tắt âm thanh
-  // const musicToggleBtn = document.getElementById("musicToggleBtn");
-  // const soundIcon = document.getElementById("soundIcon");
-  // if (musicToggleBtn) {
-  //   musicToggleBtn.addEventListener("click", () => {
-  //     soundEnabled = !soundEnabled;
-  //     if (soundIcon) soundIcon.textContent = soundEnabled ? "🔔" : "🔕";
-  //     showToast(soundEnabled ? "Đã bật âm thanh lật trang" : "Đã tắt âm thanh lật trang");
-  //   });
-  // }
+  function updateMusicButtonUI(playing) {
+    isMusicPlaying = playing;
+    if (bgMusicToggleBtn) bgMusicToggleBtn.classList.toggle("playing", playing);
+    if (bgMusicIcon) bgMusicIcon.textContent = playing ? "🎶" : "🎵";
+    if (bgMusicText) bgMusicText.textContent = playing ? "Đang phát nhạc" : "Nhạc nền";
+  }
+
+  async function toggleBackgroundMusic() {
+    const rawUrl = (GRADUATION_CONFIG.backgroundMusicUrl || "").trim();
+    if (!rawUrl) {
+      showToast("🎵 Bạn hãy dán link nhạc vào mục backgroundMusicUrl trong file script.js nhé!");
+      return;
+    }
+
+    const driveId = extractGoogleDriveId(rawUrl);
+
+    if (useDriveIframeFallback && driveId && driveMusicWidget && driveMusicIframe) {
+      const isHidden = driveMusicWidget.hidden;
+      if (isHidden) {
+        if (!driveMusicIframe.src || !driveMusicIframe.src.includes(driveId)) {
+          driveMusicIframe.src = `https://drive.google.com/file/d/${driveId}/preview`;
+        }
+        driveMusicWidget.hidden = false;
+        updateMusicButtonUI(true);
+      } else {
+        driveMusicWidget.hidden = true;
+        driveMusicIframe.src = "";
+        updateMusicButtonUI(false);
+      }
+      return;
+    }
+
+    if (!bgMusicAudio) return;
+
+    if (isMusicPlaying) {
+      bgMusicAudio.pause();
+      updateMusicButtonUI(false);
+    } else {
+      try {
+        await bgMusicAudio.play();
+        updateMusicButtonUI(true);
+      } catch {
+        // Nếu trình duyệt hoặc Google Drive từ chối stream trực tiếp, mở hộp phát Google Drive
+        if (driveId && driveMusicWidget && driveMusicIframe) {
+          useDriveIframeFallback = true;
+          driveMusicIframe.src = `https://drive.google.com/file/d/${driveId}/preview`;
+          driveMusicWidget.hidden = false;
+          updateMusicButtonUI(true);
+          showToast("🎵 Bấm nút Play trên khung nhạc nhỏ góc dưới để phát nhạc từ Google Drive nhé!");
+        }
+      }
+    }
+  }
+
+  if (bgMusicToggleBtn) {
+    bgMusicToggleBtn.addEventListener("click", () => {
+      hasAutoStarted = true;
+      toggleBackgroundMusic();
+    });
+  }
+
+  if (closeDriveMusicBtn && driveMusicWidget) {
+    closeDriveMusicBtn.addEventListener("click", () => {
+      driveMusicWidget.hidden = true;
+    });
+  }
+
+  // Tự động phát nhạc nhẹ nhàng ngay khi khách chạm/click lần đầu vào thiệp (nếu trình duyệt cho phép)
+  function tryAutoPlayOnFirstInteraction() {
+    if (hasAutoStarted) return;
+    const rawUrl = (GRADUATION_CONFIG.backgroundMusicUrl || "").trim();
+    if (!rawUrl || !bgMusicAudio || useDriveIframeFallback) return;
+    hasAutoStarted = true;
+    bgMusicAudio
+      .play()
+      .then(() => {
+        updateMusicButtonUI(true);
+      })
+      .catch(() => {
+        hasAutoStarted = false;
+      });
+  }
 
   // 3. Hàm lật trang 3D Flipbook
   function flipToPage(targetIndex) {
@@ -254,9 +339,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    tryAutoPlayOnFirstInteraction();
     isAnimating = true;
     const direction = targetIndex > currentPage ? "next" : "prev";
-    playPageFlipSound();
 
     if (turningLeaf) {
       turningLeaf.classList.remove("flipping-next", "flipping-prev");
@@ -618,6 +703,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Khởi chạy
   applyConfiguration();
+  initBackgroundMusic();
   renderMemories();
   renderRecentSentWishes();
   updateCountdown();

@@ -6,10 +6,10 @@
   <title>Thiệp Mời Lễ Tốt Nghiệp | Graduation Invitation 2026</title>
   <meta name="description" content="Thiệp mời tham dự Lễ Tốt Nghiệp - Lời tri ân gửi tới gia đình, người thân và bạn bè." />
 
-  <!-- Google Fonts hỗ trợ chuẩn Tiếng Việt & chữ số đều dòng -->
+  <!-- Google Fonts: Đồng nhất 1 font Be Vietnam Pro cho toàn bộ nội dung & Dancing Script riêng cho chữ ký tay -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -47,13 +47,31 @@
       </button>
     </nav>
 
-    <!-- <div class="top-actions">
-      <button class="music-btn" id="musicToggleBtn" type="button" title="Bật/Tắt hiệu ứng âm thanh lật sách">
-        <span id="soundIcon">🔔</span>
-        <span class="sound-text">Âm thanh</span>
+    <div class="top-actions">
+      <button class="music-btn" id="bgMusicToggleBtn" type="button" title="Bật/Tắt nhạc nền">
+        <span id="bgMusicIcon">🎵</span>
+        <span class="sound-text" id="bgMusicText">Nhạc nền</span>
       </button>
-    </div> -->
+      <audio id="bgMusicAudio" loop preload="auto"></audio>
+    </div>
   </header>
+
+  <!-- Hộp phát nhạc Google Drive thu gọn (tự động hiện nếu link nhạc Google Drive chặn phát ngầm) -->
+  <div class="drive-music-widget" id="driveMusicWidget" hidden>
+    <div class="drive-music-header">
+      <span>🎵 Nhạc nền Lễ Tốt Nghiệp</span>
+      <button type="button" id="closeDriveMusicBtn" aria-label="Ẩn hộp nhạc">✕</button>
+    </div>
+    <iframe
+      id="driveMusicIframe"
+      src=""
+      width="290"
+      height="68"
+      allow="autoplay; encrypted-media"
+      frameborder="0"
+      title="Trình phát nhạc nền Google Drive"
+    ></iframe>
+  </div>
 
   <!-- Khu vực Sách / Thiệp 3D Flipbook -->
   <main class="stage-wrapper">
@@ -471,7 +489,7 @@
 
                   <div class="letter-signature-row">
                     <div>
-                      <span class="sig-caption">Hẹn gặp bạn vào Chủ Nhật, 25/11/2026</span>
+                      <span class="sig-caption">Hẹn gặp bạn vào Thứ Tư, 25/11/2026</span>
                       <div class="handwritten-sig" id="closingSignature">Thanh An</div>
                     </div>
                     <div class="wax-seal" title="Hẹn gặp lại!">

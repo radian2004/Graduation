@@ -19,8 +19,8 @@
   --border-gold: rgba(168, 118, 36, 0.42);
   --shadow-book: 0 28px 65px rgba(10, 7, 4, 0.55), 0 6px 20px rgba(0, 0, 0, 0.35);
 
-  /* Fonts chuẩn Tiếng Việt & chữ số đều dòng */
-  --font-serif: 'Playfair Display', Georgia, serif;
+  /* Đồng nhất 1 font Be Vietnam Pro cho toàn bộ thiệp & Dancing Script riêng cho chữ ký tay */
+  --font-serif: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-script: 'Dancing Script', cursive;
   --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -174,20 +174,70 @@ body {
 .music-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
+  gap: 7px;
+  padding: 8px 16px;
   border-radius: 999px;
-  border: 1px solid rgba(223, 190, 127, 0.35);
-  background: rgba(255, 250, 240, 0.08);
+  border: 1px solid rgba(223, 190, 127, 0.45);
+  background: rgba(255, 250, 240, 0.1);
   color: var(--gold-pale);
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .music-btn:hover {
-  background: rgba(223, 190, 127, 0.2);
+  background: rgba(223, 190, 127, 0.22);
+}
+
+.music-btn.playing {
+  background: linear-gradient(135deg, #c99b49 0%, #986b1f 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 0 18px rgba(215, 178, 109, 0.45);
+}
+
+/* Hộp phát nhạc Google Drive nổi góc dưới khi dùng link Google Drive */
+.drive-music-widget {
+  position: fixed;
+  bottom: 72px;
+  right: 20px;
+  z-index: 95;
+  background: #2b2118;
+  border: 1.5px solid var(--gold-light);
+  border-radius: 14px;
+  padding: 8px 10px 10px;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.55);
+  color: var(--gold-pale);
+}
+
+.drive-music-widget[hidden] {
+  display: none;
+}
+
+.drive-music-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+
+.drive-music-header button {
+  background: transparent;
+  border: none;
+  color: var(--gold-pale);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.drive-music-widget iframe {
+  display: block;
+  border-radius: 8px;
+  background: #1a140e;
 }
 
 /* ==========================================================================
@@ -488,28 +538,31 @@ body {
   background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
 }
 
-/* Typography chung */
+/* Typography chung (Đồng nhất 1 font Be Vietnam Pro hiện đại, sang trọng) */
 .script-subtitle {
-  font-family: var(--font-script);
-  font-size: 1.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   color: var(--gold-deep);
-  line-height: 1.25;
-  margin-bottom: 3px;
+  line-height: 1.3;
+  margin-bottom: 5px;
 }
 
 .serif-title {
-  font-family: var(--font-serif);
-  font-size: 1.82rem;
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-size: 1.68rem;
+  font-weight: 800;
   color: var(--text-dark);
   line-height: 1.25;
-  letter-spacing: -0.01em;
-  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
 }
 
 .serif-subtitle {
-  font-family: var(--font-serif);
-  font-size: 1.28rem;
+  font-family: var(--font-sans);
+  font-size: 1.18rem;
   font-weight: 700;
   color: var(--text-dark);
   line-height: 1.3;
