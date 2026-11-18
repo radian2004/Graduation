@@ -59,19 +59,19 @@ const GRADUATION_CONFIG = {
     {
       url: "https://drive.google.com/file/d/1yhGdqid508ZDtoY4pmOaC6YYiqkJTSA_/view?usp=sharing",
       date: "Bảo Vệ Khóa Luận • 2026",
-      caption: "Khoảnh khắc vỡ òa khi hoàn thành đồ án tốt nghiệp"
+      caption: "Bảo vệ khóa luận tốt nghiệp xong rồi nè"
     },
     {
       url: "https://drive.google.com/file/d/1BUEcWzVvqz3zKC62ZoLCl119YaRk1AGp/view?usp=sharing",
       date: "Lễ Tốt Nghiệp • 2026",
-      caption: "Khép lại một hành trình đẹp để mở ra chân trời mới"
+      caption: "Vậy là Thanh An đã tốt nghiệp rồi!"
     }
   ],
 
   // 4. Thông tin buổi lễ & Liên hệ (Trang 3)
   eventIsoDate: "2026-11-25T08:30:00+07:00", // Định dạng YYYY-MM-DDTHH:mm:ss+07:00 để đếm ngược
   eventDateTimeDisplay: "10:30 - 12:00 • Chủ Nhật, 25/11/2026",
-  eventPhotoTimeNote: "Khung giờ chụp ảnh đẹp nhất với mình: <strong>10:30 – 11:00</strong>",
+  // eventPhotoTimeNote: "Khung giờ chụp ảnh đẹp nhất với mình: <strong>10:30 – 11:00</strong>",
   eventVenueName: "Sảnh dưới tòa E",
   eventVenueAddress: "Trường Đại học Công nghệ Thông tin, Đường Hàn Thuyên, P. Linh Xuân, Tp. Hồ Chí Minh",
   googleMapsUrl: "https://maps.app.goo.gl/C5xfqYLQYLJYePYv5",
@@ -203,50 +203,50 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 2. Tạo hiệu ứng âm thanh lật giấy dịu nhẹ bằng Web Audio API
-  function playPageFlipSound() {
-    if (!soundEnabled) return;
-    try {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-      const bufferSize = ctx.sampleRate * 0.14;
-      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.045));
-      }
+  // function playPageFlipSound() {
+  //   if (!soundEnabled) return;
+  //   try {
+  //     const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  //     if (!AudioCtx) return;
+  //     const ctx = new AudioCtx();
+  //     const bufferSize = ctx.sampleRate * 0.14;
+  //     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  //     const data = buffer.getChannelData(0);
+  //     for (let i = 0; i < bufferSize; i++) {
+  //       data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.045));
+  //     }
 
-      const noise = ctx.createBufferSource();
-      noise.buffer = buffer;
+  //     const noise = ctx.createBufferSource();
+  //     noise.buffer = buffer;
 
-      const filter = ctx.createBiquadFilter();
-      filter.type = "bandpass";
-      filter.frequency.setValueAtTime(950, ctx.currentTime);
-      filter.Q.setValueAtTime(1.4, ctx.currentTime);
+  //     const filter = ctx.createBiquadFilter();
+  //     filter.type = "bandpass";
+  //     filter.frequency.setValueAtTime(950, ctx.currentTime);
+  //     filter.Q.setValueAtTime(1.4, ctx.currentTime);
 
-      const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0.12, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.13);
+  //     const gain = ctx.createGain();
+  //     gain.gain.setValueAtTime(0.12, ctx.currentTime);
+  //     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.13);
 
-      noise.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
-      noise.start();
-    } catch {
-      // Bỏ qua nếu trình duyệt chặn tự phát âm thanh
-    }
-  }
+  //     noise.connect(filter);
+  //     filter.connect(gain);
+  //     gain.connect(ctx.destination);
+  //     noise.start();
+  //   } catch {
+  //     // Bỏ qua nếu trình duyệt chặn tự phát âm thanh
+  //   }
+  // }
 
   // Nút bật/tắt âm thanh
-  const musicToggleBtn = document.getElementById("musicToggleBtn");
-  const soundIcon = document.getElementById("soundIcon");
-  if (musicToggleBtn) {
-    musicToggleBtn.addEventListener("click", () => {
-      soundEnabled = !soundEnabled;
-      if (soundIcon) soundIcon.textContent = soundEnabled ? "🔔" : "🔕";
-      showToast(soundEnabled ? "Đã bật âm thanh lật trang" : "Đã tắt âm thanh lật trang");
-    });
-  }
+  // const musicToggleBtn = document.getElementById("musicToggleBtn");
+  // const soundIcon = document.getElementById("soundIcon");
+  // if (musicToggleBtn) {
+  //   musicToggleBtn.addEventListener("click", () => {
+  //     soundEnabled = !soundEnabled;
+  //     if (soundIcon) soundIcon.textContent = soundEnabled ? "🔔" : "🔕";
+  //     showToast(soundEnabled ? "Đã bật âm thanh lật trang" : "Đã tắt âm thanh lật trang");
+  //   });
+  // }
 
   // 3. Hàm lật trang 3D Flipbook
   function flipToPage(targetIndex) {
